@@ -1,6 +1,6 @@
 # CE-RISE Metrological Traceability Data Model
 
-[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/metrological-traceability/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20084797.svg)](https://doi.org/10.5281/zenodo.20084797) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/metrological-traceability/)
 
 This repository defines the CE-RISE cross-cutting data model for metrological traceability.
 It provides reusable structures for documenting the reference basis of measured,
