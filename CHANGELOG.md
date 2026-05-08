@@ -1,10 +1,10 @@
 # Changelog
 
-All notable changes to the CE-RISE RE-XXX Data Model will be documented in this file.
+All notable changes to the CE-RISE Metrological Traceability Data Model will be documented in this file.
 
 ## [0.0.1] - unreleased
 
 ### Added
-- Initial project structure and repository setup from template: https://ce-rise-models.codeberg.page/template-data-model/
-- Initial data model structure for XXXX
-- Artifacts built and deployed to pages
+- Initial project structure for the CE-RISE Metrological Traceability Data Model
+- LinkML model structure for traceability statements, bases, chains, links, calibrations, methods, boundaries, reference materials, measurement standards, competence records, comparability assessments, and evidence references
+- Repository metadata for Codeberg Pages, Zenodo, citation, and GitHub release mirroring
