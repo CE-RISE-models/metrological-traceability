@@ -1,0 +1,1195 @@
+@prefix mt: <https://ce-rise-models.codeberg.page/metrological-traceability/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+mt:metrologicalTraceability a sh:NodeShape ;
+    rdfs:comment "Root container for metrological traceability statements and supporting records" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class mt:measurementProcedure ;
+            sh:description "Measurement, calculation, sampling, calibration, analytical, or modelling procedures used for traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path mt:measurement_procedures ],
+        [ sh:class mt:calibrationRecord ;
+            sh:description "Calibration, comparison, verification, or check records that support traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path mt:calibration_records ],
+        [ sh:class mt:traceabilityBasis ;
+            sh:description "Reference bases used to establish metrological traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path mt:traceability_bases ],
+        [ sh:class mt:boundaryDefinition ;
+            sh:description "Boundary, goal-and-scope, scenario, or model definitions used as traceability references" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path mt:boundary_definitions ],
+        [ sh:class mt:traceabilityStatement ;
+            sh:description "Reusable traceability statements that can be embedded or referenced by other CE-RISE data models" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path mt:traceability_statements ],
+        [ sh:class mt:referenceMaterial ;
+            sh:description "Reference materials and certified reference materials used in traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path mt:reference_materials ],
+        [ sh:class mt:competenceRecord ;
+            sh:description "Competence, accreditation, validation, or quality system records supporting traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 9 ;
+            sh:path mt:competence_records ],
+        [ sh:class mt:measurementStandard ;
+            sh:description "Measurement standards, artefacts, instruments, and realizations used in traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path mt:measurement_standards ],
+        [ sh:class mt:evidenceReference ;
+            sh:description "Evidence records referenced by the metrological traceability model" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 11 ;
+            sh:path mt:evidence_references ],
+        [ sh:class mt:referenceEntity ;
+            sh:description "Reference entities, standards, methods, instruments, datasets, or organizations used in traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path mt:reference_entities ],
+        [ sh:class mt:comparabilityAssessment ;
+            sh:description "Assessments of whether traceability statements support meaningful comparison" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 10 ;
+            sh:path mt:comparability_assessments ],
+        [ sh:class mt:traceabilityChain ;
+            sh:description "Traceability chains or networks available for reuse by one or more traceability statements" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path mt:traceability_chains ] ;
+    sh:targetClass mt:metrologicalTraceability .
+
+mt:comparabilityAssessment a sh:NodeShape ;
+    rdfs:comment "Assessment of whether two reported values are metrologically comparable through the same reference basis, measurand definition, method, or boundary" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Reference to the first traceability statement, chain, or basis being compared" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:left_traceability_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to the second traceability statement, chain, or basis being compared" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mt:right_traceability_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for an assessment of metrological comparability" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:comparability_assessment_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Rationale for the comparability decision, including relevant mismatches or limitations" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:comparability_rationale_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:uncertainty_reference_value ],
+        [ sh:description "Decision about whether the compared results are metrologically comparable" ;
+            sh:in ( "comparable" "comparable_with_conditions" "not_comparable" "insufficient_information" "not_evaluated" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mt:comparability_decision_value ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Whether the compared results use the same method-defined or boundary-defined reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:same_method_or_boundary_value ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Whether the compared results use the same measurand or operational definition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:same_measurand_definition_value ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Whether the compared results are traceable to the same reference basis" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:same_reference_basis_value ] ;
+    sh:targetClass mt:comparabilityAssessment .
+
+mt:evidenceReference a sh:NodeShape ;
+    rdfs:comment "Supporting evidence record for a traceability statement, chain, calibration, method, boundary, reference material, or competence record" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:date ;
+            sh:description "Date associated with supporting evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:evidence_date_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version, edition, or revision of supporting evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:evidence_version_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URL for supporting evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mt:evidence_url_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Provider, author, laboratory, supplier, or organization responsible for supporting evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:evidence_provider_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Description of supporting evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:evidence_description_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for supporting evidence" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:evidence_identifier_value ],
+        [ sh:description "Type of supporting evidence" ;
+            sh:in ( "calibration_certificate" "reference_material_certificate" "test_report" "method_standard" "procedure_document" "accreditation_record" "proficiency_test" "validation_report" "dataset_reference" "software_record" "boundary_document" "supplier_declaration" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path mt:evidence_type_value ] ;
+    sh:targetClass mt:evidenceReference .
+
+mt:traceabilityLink a sh:NodeShape ;
+    rdfs:comment "Single documented step in a traceability chain, including calibration, comparison, transfer, method adherence, or boundary reference" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Identifier for a step, edge, or link in a traceability chain" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:traceability_link_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:integer ;
+            sh:description "Position of the link in the traceability chain, where lower numbers are closer to the reported result" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:link_sequence_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference entity, value, standard, method, or node to which this link points" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:link_to_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Procedure, calibration, comparison, transformation, conversion, or modelling step used in this link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:link_procedure_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference entity, value, standard, method, or node from which this link starts" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:link_from_reference_value ],
+        [ sh:description "Role of the traceability link in the chain" ;
+            sh:in ( "calibration" "comparison" "verification" "correction" "value_transfer" "method_definition" "boundary_definition" "data_source_mapping" "software_or_model_execution" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mt:link_role_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date on which this traceability link, calibration, comparison, transformation, or modelling step was established" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:link_date_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to the uncertainty contribution associated with this traceability link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:link_uncertainty_reference_value ],
+        [ sh:class mt:calibrationRecord ;
+            sh:description "Calibration, comparison, verification, or check records that support traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path mt:calibration_records ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional notes about the traceability statement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:statement_notes_value ] ;
+    sh:targetClass mt:traceabilityLink .
+
+mt:traceabilityStatement a sh:NodeShape ;
+    rdfs:comment "Reusable statement documenting the traceability basis of a measured, calculated, method-defined, or boundary-defined value" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class mt:measurementStandard ;
+            sh:description "Measurement standards, artefacts, instruments, and realizations used in traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 27 ;
+            sh:path mt:measurement_standards ],
+        [ sh:class mt:traceabilityBasis ;
+            sh:description "Reference basis that establishes the meaning and comparability of the value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 20 ;
+            sh:path mt:traceability_basis ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for the reported measured, calculated, or assessed value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 16 ;
+            sh:path mt:reported_value_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier of the external record, object, dataset, or passport entry to which this traceability statement applies" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:applies_to_record_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Standard, guide, protocol, or normative document applied when establishing traceability" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 32 ;
+            sh:path mt:standards_applied_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 31 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a metrological traceability statement that can be referenced from another CE-RISE model" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:traceability_statement_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reported value to which the traceability statement applies" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 17 ;
+            sh:path mt:reported_value_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for the measurand, quantity, indicator, or value of interest" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mt:measurand_identifier_value ],
+        [ sh:class mt:measurementProcedure ;
+            sh:description "Procedure or method used to define, obtain, transfer, or compare the value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 22 ;
+            sh:path mt:measurement_procedure ],
+        [ sh:class mt:traceabilityChain ;
+            sh:description "Traceability chain or network that relates the result to a reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 21 ;
+            sh:path mt:traceability_chain ],
+        [ sh:datatype xsd:string ;
+            sh:description "Kind of quantity or indicator being traced, such as mass, length, concentration, carbon footprint, or circularity indicator" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path mt:quantity_kind_value ],
+        [ sh:class mt:referenceEntity ;
+            sh:description "Reference entities, standards, methods, instruments, datasets, or organizations used in traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 25 ;
+            sh:path mt:reference_entities ],
+        [ sh:description "Type of traceability being documented" ;
+            sh:in ( "si_traceability" "method_defined_traceability" "boundary_defined_traceability" "reference_material_traceability" "conventional_reference_traceability" "hybrid_traceability" "not_evaluated" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mt:traceability_statement_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot or attribute in an external model to which this traceability statement applies" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:applies_to_slot_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "JSONPath, XPath, RDF path, or other pointer to the value to which this traceability statement applies" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:applies_to_value_path_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Class in an external model to which this traceability statement applies" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:applies_to_class_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label for the traceability statement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:traceability_statement_label_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier of a specific value object when the target model gives value-level identifiers" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:applies_to_value_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit associated with the reported value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path mt:reported_value_unit_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name, URI, or namespace of the external data model to which this traceability statement applies" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:applies_to_model_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 29 ;
+            sh:path mt:uncertainty_reference_value ],
+        [ sh:class mt:boundaryDefinition ;
+            sh:description "Boundary, goal-and-scope, scenario, or model definition used to define a modelled value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 23 ;
+            sh:path mt:boundary_definition ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date or time at which the reported result was generated, measured, calculated, or issued" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 19 ;
+            sh:path mt:result_date_value ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date and time when the traceability statement was issued or last updated" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:traceability_statement_date_value ],
+        [ sh:class mt:calibrationRecord ;
+            sh:description "Calibration, comparison, verification, or check records that support traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 24 ;
+            sh:path mt:calibration_records ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit in which the value or measurand is expressed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path mt:quantity_unit_value ],
+        [ sh:class mt:referenceMaterial ;
+            sh:description "Reference materials and certified reference materials used in traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 26 ;
+            sh:path mt:reference_materials ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to a data quality assessment associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 30 ;
+            sh:path mt:data_quality_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional notes about the traceability statement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 33 ;
+            sh:path mt:statement_notes_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Operational definition of the measurand, including what is measured, calculated, or assessed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path mt:measurand_description_value ],
+        [ sh:description "Lifecycle or validity status of the traceability statement" ;
+            sh:in ( "draft" "active" "reviewed" "verified" "partial" "expired" "superseded" "unavailable" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path mt:traceability_status_value ],
+        [ sh:class mt:competenceRecord ;
+            sh:description "Competence, accreditation, validation, or quality system records supporting traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 28 ;
+            sh:path mt:competence_records ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the measurand, quantity, indicator, or value of interest" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path mt:measurand_name_value ] ;
+    sh:targetClass mt:traceabilityStatement .
+
+mt:boundaryDefinition a sh:NodeShape ;
+    rdfs:comment "Goal-and-scope, system boundary, scenario, allocation, or model definition used as the reference for a boundary-defined result" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the boundary, scope, scenario, or modelling definition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mt:boundary_name_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Goal and scope definition or equivalent statement that defines the assessed value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:goal_scope_definition_value ],
+        [ sh:description "Type of boundary or scope definition" ;
+            sh:in ( "system_boundary" "goal_and_scope" "functional_unit" "allocation_boundary" "scenario_definition" "temporal_boundary" "geographical_boundary" "technological_boundary" "characterization_model" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path mt:boundary_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Allocation, partitioning, substitution, cut-off, or burden-sharing rule applied in the boundary definition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:allocation_rule_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Processes, stages, flows, compartments, or elements excluded from the boundary" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:excluded_processes_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Characterization model, factor set, time horizon, scenario, or model version used to convert inputs into the reported result" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:characterization_model_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Standardized procedure, protocol, guide, or method document" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:procedure_standard_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a boundary, scope, scenario, or modelling reference definition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:boundary_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to a data quality assessment associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path mt:data_quality_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Processes, stages, flows, compartments, or elements included in the boundary" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:included_processes_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path mt:uncertainty_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Impact assessment, characterization, scoring, or calculation method used for a modelled result" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:impact_method_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version, edition, revision, or publication date of the procedure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mt:procedure_version_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Temporal, geographical, technological, or population scope of the data sources used by the boundary definition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:data_source_scope_value ] ;
+    sh:targetClass mt:boundaryDefinition .
+
+mt:competenceRecord a sh:NodeShape ;
+    rdfs:comment "Competence, accreditation, validation, proficiency, or quality system evidence supporting traceability" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:date ;
+            sh:description "End date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:reference_valid_until_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Start date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:reference_valid_from_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Accreditation body, authority, or organization responsible for the competence record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:accreditation_body_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Accreditation, authorization, scope, or certificate identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:accreditation_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Basis for competence, such as accreditation, proficiency testing, validation, authorization, or quality management system" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mt:competence_basis_value ],
+        [ sh:description "Status of the competence or accreditation record" ;
+            sh:in ( "active" "suspended" "expired" "withdrawn" "not_applicable" "not_available" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mt:competence_status_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Scope of competence, accreditation, validation, or authorization" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:competence_scope_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Laboratory, person, organization, facility, or software provider whose competence is documented" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:competence_provider_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a competence, accreditation, authorization, or quality system record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:competence_record_identifier_value ] ;
+    sh:targetClass mt:competenceRecord .
+
+mt:measurementProcedure a sh:NodeShape ;
+    rdfs:comment "Measurement, calculation, sampling, calibration, analytical, or modelling procedure used to define or transfer a value" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mt:uncertainty_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the procedure or method" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:procedure_name_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Environmental, operating, or procedural conditions relevant to traceability" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:environmental_conditions_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI or URL identifying the procedure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:procedure_uri_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Operator, laboratory, instrument system, model, or software used to apply the procedure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:operator_or_software_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier of a measurement, calculation, sampling, calibration, analytical, or modelling procedure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:procedure_identifier_value ],
+        [ sh:description "Role of the procedure in establishing traceability" ;
+            sh:in ( "measurement" "calibration" "sampling" "analytical_method" "calculation" "modelling" "quality_control" "reporting" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mt:procedure_role_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Key method parameters, such as extraction conditions, incubation time, temperature, calibration model, or reporting rule" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:method_parameters_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Standardized procedure, protocol, guide, or method document" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:procedure_standard_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Definition of the sample, specimen, item, batch, population subset, or material matrix used by the method" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:sampling_or_specimen_definition_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version, edition, revision, or publication date of the procedure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:procedure_version_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Description of the procedure and how it defines or transfers the value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:procedure_description_value ] ;
+    sh:targetClass mt:measurementProcedure .
+
+mt:measurementStandard a sh:NodeShape ;
+    rdfs:comment "Measurement standard, artefact, instrument standard, or unit realization used in a calibration hierarchy" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Owner, custodian, laboratory, or institute responsible for the measurement standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:measurement_standard_owner_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the measurement standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:measurement_standard_name_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uncertainty associated with the assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:assigned_value_uncertainty_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit associated with the assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:assigned_value_unit_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Kind of quantity or indicator being traced, such as mass, length, concentration, carbon footprint, or circularity indicator" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:quantity_kind_value ],
+        [ sh:description "Type or level of measurement standard" ;
+            sh:in ( "international_standard" "national_standard" "primary_standard" "secondary_standard" "reference_standard" "working_standard" "transfer_standard" "instrument_standard" "unit_realization" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mt:measurement_standard_type_value ],
+        [ sh:class mt:calibrationRecord ;
+            sh:description "Calibration, comparison, verification, or check records that support traceability" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 10 ;
+            sh:path mt:calibration_records ],
+        [ sh:datatype xsd:date ;
+            sh:description "End date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path mt:reference_valid_until_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Assigned value of a measurement standard, reference material, calibrator, or conventional reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:assigned_value_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Position of the measurement standard in the calibration hierarchy" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:measurement_standard_level_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a measurement standard, artefact, instrument standard, or realization" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:measurement_standard_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit in which the value or measurand is expressed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:quantity_unit_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Start date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mt:reference_valid_from_value ] ;
+    sh:targetClass mt:measurementStandard .
+
+mt:referenceEntity a sh:NodeShape ;
+    rdfs:comment "Generic reference entity used in a traceability statement, chain, procedure, calibration, or boundary definition" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "Type of reference entity" ;
+            sh:in ( "si_definition" "national_standard" "international_standard" "working_standard" "instrument" "reference_material" "calibration_certificate" "method_document" "dataset" "software" "boundary_document" "organization" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mt:reference_entity_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Provider, custodian, producer, laboratory, institute, or publisher of the reference entity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:reference_entity_provider_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI or URL for the reference entity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:reference_entity_uri_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Assigned value of a measurement standard, reference material, calibrator, or conventional reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:assigned_value_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a reference entity, material, standard, instrument, facility, method, or dataset" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:reference_entity_identifier_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Start date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:reference_valid_from_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the reference entity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:reference_entity_name_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uncertainty associated with the assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:assigned_value_uncertainty_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "End date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:reference_valid_until_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit associated with the assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:assigned_value_unit_value ] ;
+    sh:targetClass mt:referenceEntity .
+
+mt:referenceMaterial a sh:NodeShape ;
+    rdfs:comment "Reference material or certified reference material used to establish traceability" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Matrix, material, substance, artefact, or object represented by the reference material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:matrix_or_material_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URL for the reference material certificate" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mt:certificate_url_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Start date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path mt:reference_valid_from_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Assigned value of a measurement standard, reference material, calibrator, or conventional reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:assigned_value_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Lot, batch, serial number, or production identifier of the reference material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:reference_material_lot_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier of the reference material certificate" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:certificate_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uncertainty associated with the assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:assigned_value_uncertainty_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Producer, supplier, or certifying body responsible for the reference material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:reference_material_producer_value ],
+        [ sh:description "Type or role of the reference material" ;
+            sh:in ( "certified_reference_material" "reference_material" "calibrator" "quality_control_material" "matrix_reference_material" "in_house_reference_material" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mt:reference_material_type_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "End date of validity for the reference entity or assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path mt:reference_valid_until_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a reference material or certified reference material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:reference_material_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unit associated with the assigned value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:assigned_value_unit_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Certified or assigned property of the reference material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:certified_property_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the reference material" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:reference_material_name_value ] ;
+    sh:targetClass mt:referenceMaterial .
+
+mt:traceabilityBasis a sh:NodeShape ;
+    rdfs:comment "Reference basis to which a result is related, such as an SI realization, measurement standard, reference material, standard method, or boundary definition" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Identifier for the final reference, such as an SI unit realization, standard method, reference material, system boundary definition, or characterization model" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:common_reference_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of the final common reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:common_reference_name_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Scope or field of application for the reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:reference_scope_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date at which the reference was used to establish the traceability hierarchy" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:reference_used_date_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Description of the common reference basis that gives meaning to the result" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mt:traceability_basis_description_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a traceability basis record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:traceability_basis_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:uncertainty_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version, edition, revision, or publication date of the reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:reference_version_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI or URL identifying the final common reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:common_reference_uri_value ],
+        [ sh:description "Type of reference basis used to establish traceability" ;
+            sh:in ( "si_unit_realization" "measurement_standard" "certified_reference_material" "reference_material" "measurement_procedure" "standard_method" "system_boundary" "characterization_model" "data_source_or_dataset" "conventional_reference" "other" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path mt:traceability_basis_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Authority, organization, metrology institute, standards body, or publisher responsible for the reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:reference_authority_value ] ;
+    sh:targetClass mt:traceabilityBasis .
+
+mt:traceabilityChain a sh:NodeShape ;
+    rdfs:comment "Documented chain or network relating a measurement result to a reference" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:uncertainty_reference_value ],
+        [ sh:description "Validation status of the traceability chain" ;
+            sh:in ( "draft" "active" "reviewed" "verified" "partial" "expired" "superseded" "unavailable" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mt:chain_validation_status_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a traceability chain or traceability network" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:traceability_chain_identifier_value ],
+        [ sh:class mt:traceabilityLink ;
+            sh:description "Ordered or networked links that make up a traceability chain" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path mt:traceability_links ],
+        [ sh:description "Assessment of whether the chain is complete, partial, inferred, or unavailable" ;
+            sh:in ( "complete" "partial" "inferred" "gap_identified" "unavailable" ) ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mt:chain_completeness_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Final reference reached by the traceability chain" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:chain_end_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name of the traceability chain" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:traceability_chain_name_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference or value at the user-facing end of the traceability chain" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:chain_start_reference_value ],
+        [ sh:description "Type or topology of the traceability chain" ;
+            sh:in ( "linear_calibration_chain" "branched_calibration_network" "method_traceability_chain" "boundary_traceability_chain" "hybrid_chain" "not_documented" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mt:traceability_chain_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Additional notes about the traceability chain, including gaps or assumptions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:chain_notes_value ] ;
+    sh:targetClass mt:traceabilityChain .
+
+mt:calibrationRecord a sh:NodeShape ;
+    rdfs:comment "Calibration, comparison, verification, or check record contributing to a traceability chain" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path mt:uncertainty_reference_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date by which recalibration is due" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mt:calibration_due_date_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URL for the calibration certificate or equivalent evidence record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mt:calibration_certificate_url_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier for a calibration, comparison, verification, or check record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mt:calibration_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier of the calibration certificate or equivalent evidence record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mt:calibration_certificate_identifier_value ],
+        [ sh:description "Validity or acceptance status of the calibration record" ;
+            sh:in ( "valid" "valid_with_restrictions" "due" "expired" "failed" "superseded" "not_available" ) ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path mt:calibration_status_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Calibration result, correction, factor, or outcome statement" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mt:calibration_result_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Type of calibrated item" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mt:calibrated_item_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identifier of the instrument, sensor, measuring system, reference material, standard, or software item calibrated or checked" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mt:calibrated_item_identifier_value ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date on which the calibration was performed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mt:calibration_date_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Laboratory, organization, or facility that performed the calibration" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mt:calibration_laboratory_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path mt:evidence_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Accreditation identifier, scope, or body associated with the calibration provider" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mt:calibration_laboratory_accreditation_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Calibration method, procedure, comparison method, or protocol used" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mt:calibration_method_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Calibration interval or recalibration frequency" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mt:calibration_interval_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Environmental, operating, or procedural conditions relevant to traceability" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path mt:environmental_conditions_value ] ;
+    sh:targetClass mt:calibrationRecord .
+
+
