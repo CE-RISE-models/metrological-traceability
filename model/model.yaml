@@ -6,7 +6,7 @@ description: >
     calculated, method-defined, and boundary-defined values in CE-RISE Digital Product Passport
     and Digital Material Passport data models.
 license: CC BY-NC 4.0
-version: 0.0.2
+version: 0.0.3
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -1097,7 +1097,6 @@ classes:
     MetrologicalTraceability:
         class_uri: mt:metrologicalTraceability
         description: "Root container for metrological traceability statements and supporting records"
-        tree_root: true
         slots:
             - traceability_statements
             - traceability_chains
