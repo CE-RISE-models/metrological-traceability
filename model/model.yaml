@@ -6,7 +6,7 @@ description: >
     calculated, method-defined, and boundary-defined values in CE-RISE Digital Product Passport
     and Digital Material Passport data models.
 license: CC BY-NC 4.0
-version: 0.0.1
+version: 0.0.2
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -68,77 +68,77 @@ slots:
             owl.filler: dcterms:modified
             sql_identifier: "mt_statement_date"
 
-    applies_to_model_value:
+    traceability_applies_to_model_value:
         description: "Name, URI, or namespace of the external data model to which this traceability statement applies"
         range: string
         annotations:
             owl.filler: mt:appliesToModelValue
             sql_identifier: "mt_applies_to_model"
 
-    applies_to_class_value:
+    traceability_applies_to_class_value:
         description: "Class in an external model to which this traceability statement applies"
         range: string
         annotations:
             owl.filler: mt:appliesToClassValue
             sql_identifier: "mt_applies_to_class"
 
-    applies_to_slot_value:
+    traceability_applies_to_slot_value:
         description: "Slot or attribute in an external model to which this traceability statement applies"
         range: string
         annotations:
             owl.filler: mt:appliesToSlotValue
             sql_identifier: "mt_applies_to_slot"
 
-    applies_to_record_value:
+    traceability_applies_to_record_value:
         description: "Identifier of the external record, object, dataset, or passport entry to which this traceability statement applies"
         range: string
         annotations:
             owl.filler: mt:appliesToRecordValue
             sql_identifier: "mt_applies_to_record"
 
-    applies_to_value_path_value:
+    traceability_applies_to_value_path_value:
         description: "JSONPath, XPath, RDF path, or other pointer to the value to which this traceability statement applies"
         range: string
         annotations:
             owl.filler: mt:appliesToValuePathValue
             sql_identifier: "mt_applies_to_value_path"
 
-    applies_to_value_identifier_value:
+    traceability_applies_to_value_identifier_value:
         description: "Identifier of a specific value object when the target model gives value-level identifiers"
         range: string
         annotations:
             owl.filler: mt:appliesToValueIdentifierValue
             sql_identifier: "mt_applies_to_value_identifier"
 
-    uncertainty_reference_value:
+    traceability_uncertainty_reference_value:
         description: "Reference to an uncertainty statement, uncertainty budget, or uncertainty component associated with this traceability record"
         range: string
         annotations:
             owl.filler: uq:uncertaintyReference
             sql_identifier: "mt_uncertainty_reference"
 
-    data_quality_reference_value:
+    traceability_data_quality_reference_value:
         description: "Reference to a data quality assessment associated with this traceability record"
         range: string
         annotations:
             owl.filler: dqf:dataQualityReference
             sql_identifier: "mt_data_quality_reference"
 
-    evidence_reference_value:
+    traceability_evidence_reference_value:
         description: "Reference to supporting evidence such as a certificate, report, procedure, dataset, standard, or software record"
         range: string
         annotations:
             owl.filler: prov:wasDerivedFrom
             sql_identifier: "mt_evidence_reference_value"
 
-    standards_applied_value:
+    traceability_standards_applied_value:
         description: "Standard, guide, protocol, or normative document applied when establishing traceability"
         range: string
         annotations:
             owl.filler: dcterms:conformsTo
             sql_identifier: "mt_standards_applied"
 
-    statement_notes_value:
+    traceability_statement_notes_value:
         description: "Additional notes about the traceability statement"
         range: string
         annotations:
@@ -146,35 +146,35 @@ slots:
             sql_identifier: "mt_statement_notes"
 
     # Quantity, measurand, and value basis
-    measurand_identifier_value:
+    traceability_measurand_identifier_value:
         description: "Identifier for the measurand, quantity, indicator, or value of interest"
         range: string
         annotations:
             owl.filler: dcterms:identifier
             sql_identifier: "mt_measurand_identifier"
 
-    measurand_name_value:
+    traceability_measurand_name_value:
         description: "Name of the measurand, quantity, indicator, or value of interest"
         range: string
         annotations:
             owl.filler: rdfs:label
             sql_identifier: "mt_measurand_name"
 
-    measurand_description_value:
+    traceability_measurand_description_value:
         description: "Operational definition of the measurand, including what is measured, calculated, or assessed"
         range: string
         annotations:
             owl.filler: skos:definition
             sql_identifier: "mt_measurand_description"
 
-    quantity_kind_value:
+    traceability_quantity_kind_value:
         description: "Kind of quantity or indicator being traced, such as mass, length, concentration, carbon footprint, or circularity indicator"
         range: string
         annotations:
             owl.filler: qudt:hasQuantityKind
             sql_identifier: "mt_quantity_kind"
 
-    quantity_unit_value:
+    traceability_quantity_unit_value:
         description: "Unit in which the value or measurand is expressed"
         range: string
         annotations:
@@ -620,7 +620,7 @@ slots:
             owl.filler: sosa:hasSample
             sql_identifier: "mt_sampling_or_specimen_definition"
 
-    environmental_conditions_value:
+    traceability_environmental_conditions_value:
         description: "Environmental, operating, or procedural conditions relevant to traceability"
         range: string
         annotations:
@@ -910,49 +910,49 @@ slots:
             sql_identifier: "mt_comparability_rationale"
 
     # Evidence records
-    evidence_identifier_value:
+    traceability_evidence_identifier_value:
         description: "Identifier for supporting evidence"
         range: string
         annotations:
             owl.filler: dcterms:identifier
             sql_identifier: "mt_evidence_identifier"
 
-    evidence_type_value:
+    traceability_evidence_type_value:
         description: "Type of supporting evidence"
-        range: EvidenceTypeEnum
+        range: TraceabilityEvidenceTypeEnum
         annotations:
             owl.filler: dcterms:type
             sql_identifier: "mt_evidence_type"
 
-    evidence_url_value:
+    traceability_evidence_url_value:
         description: "URL for supporting evidence"
         range: uri
         annotations:
             owl.filler: schema:url
             sql_identifier: "mt_evidence_url"
 
-    evidence_description_value:
+    traceability_evidence_description_value:
         description: "Description of supporting evidence"
         range: string
         annotations:
             owl.filler: dcterms:description
             sql_identifier: "mt_evidence_description"
 
-    evidence_date_value:
+    traceability_evidence_date_value:
         description: "Date associated with supporting evidence"
         range: date
         annotations:
             owl.filler: dcterms:date
             sql_identifier: "mt_evidence_date"
 
-    evidence_provider_value:
+    traceability_evidence_provider_value:
         description: "Provider, author, laboratory, supplier, or organization responsible for supporting evidence"
         range: string
         annotations:
             owl.filler: prov:Agent
             sql_identifier: "mt_evidence_provider"
 
-    evidence_version_value:
+    traceability_evidence_version_value:
         description: "Version, edition, or revision of supporting evidence"
         range: string
         annotations:
@@ -1048,9 +1048,9 @@ slots:
             owl.filler: mt:comparabilityAssessment
             sql_identifier: "mt_comparability_assessments"
 
-    evidence_references:
+    traceability_evidence_references:
         description: "Evidence records referenced by the metrological traceability model"
-        range: EvidenceReference
+        range: TraceabilityEvidenceReference
         multivalued: true
         annotations:
             owl.filler: mt:evidenceReference
@@ -1110,7 +1110,7 @@ classes:
             - measurement_standards
             - competence_records
             - comparability_assessments
-            - evidence_references
+            - traceability_evidence_references
         annotations:
             sql_identifier: "mt_root"
 
@@ -1127,17 +1127,17 @@ classes:
             - traceability_statement_type_value
             - traceability_status_value
             - traceability_statement_date_value
-            - applies_to_model_value
-            - applies_to_class_value
-            - applies_to_slot_value
-            - applies_to_record_value
-            - applies_to_value_path_value
-            - applies_to_value_identifier_value
-            - measurand_identifier_value
-            - measurand_name_value
-            - measurand_description_value
-            - quantity_kind_value
-            - quantity_unit_value
+            - traceability_applies_to_model_value
+            - traceability_applies_to_class_value
+            - traceability_applies_to_slot_value
+            - traceability_applies_to_record_value
+            - traceability_applies_to_value_path_value
+            - traceability_applies_to_value_identifier_value
+            - traceability_measurand_identifier_value
+            - traceability_measurand_name_value
+            - traceability_measurand_description_value
+            - traceability_quantity_kind_value
+            - traceability_quantity_unit_value
             - reported_value_identifier_value
             - reported_value_value
             - reported_value_unit_value
@@ -1151,11 +1151,11 @@ classes:
             - reference_materials
             - measurement_standards
             - competence_records
-            - uncertainty_reference_value
-            - data_quality_reference_value
-            - evidence_reference_value
-            - standards_applied_value
-            - statement_notes_value
+            - traceability_uncertainty_reference_value
+            - traceability_data_quality_reference_value
+            - traceability_evidence_reference_value
+            - traceability_standards_applied_value
+            - traceability_statement_notes_value
         annotations:
             references: "JCGM 200:2012; ISO/IEC 17025; ILAC P10; ISO 17034; ISO Guide 35; ISO 14040; ISO 14044"
             sql_identifier: "mt_statement"
@@ -1174,8 +1174,8 @@ classes:
             - reference_version_value
             - reference_used_date_value
             - reference_scope_value
-            - uncertainty_reference_value
-            - evidence_reference_value
+            - traceability_uncertainty_reference_value
+            - traceability_evidence_reference_value
         annotations:
             references: "JCGM 200:2012; ISO/IEC 17025; ILAC P10"
             sql_identifier: "mt_basis"
@@ -1194,7 +1194,7 @@ classes:
             - assigned_value_uncertainty_value
             - reference_valid_from_value
             - reference_valid_until_value
-            - evidence_reference_value
+            - traceability_evidence_reference_value
         annotations:
             references: "JCGM 200:2012"
             sql_identifier: "mt_reference_entity"
@@ -1211,8 +1211,8 @@ classes:
             - chain_completeness_value
             - chain_validation_status_value
             - traceability_links
-            - uncertainty_reference_value
-            - evidence_reference_value
+            - traceability_uncertainty_reference_value
+            - traceability_evidence_reference_value
             - chain_notes_value
         annotations:
             references: "JCGM 200:2012; ISO/IEC 17025; ILAC P10"
@@ -1231,8 +1231,8 @@ classes:
             - link_uncertainty_reference_value
             - link_date_value
             - calibration_records
-            - evidence_reference_value
-            - statement_notes_value
+            - traceability_evidence_reference_value
+            - traceability_statement_notes_value
         annotations:
             references: "JCGM 200:2012; ISO/IEC 17025"
             sql_identifier: "mt_link"
@@ -1254,9 +1254,9 @@ classes:
             - calibration_interval_value
             - calibration_result_value
             - calibration_status_value
-            - uncertainty_reference_value
-            - environmental_conditions_value
-            - evidence_reference_value
+            - traceability_uncertainty_reference_value
+            - traceability_environmental_conditions_value
+            - traceability_evidence_reference_value
         annotations:
             references: "ISO/IEC 17025; ILAC P10; JCGM 200:2012"
             sql_identifier: "mt_calibration"
@@ -1274,10 +1274,10 @@ classes:
             - procedure_description_value
             - method_parameters_value
             - sampling_or_specimen_definition_value
-            - environmental_conditions_value
+            - traceability_environmental_conditions_value
             - operator_or_software_value
-            - uncertainty_reference_value
-            - evidence_reference_value
+            - traceability_uncertainty_reference_value
+            - traceability_evidence_reference_value
         annotations:
             references: "JCGM 200:2012; ISO/IEC 17025; ISO 5725"
             sql_identifier: "mt_procedure"
@@ -1298,9 +1298,9 @@ classes:
             - data_source_scope_value
             - procedure_standard_value
             - procedure_version_value
-            - uncertainty_reference_value
-            - data_quality_reference_value
-            - evidence_reference_value
+            - traceability_uncertainty_reference_value
+            - traceability_data_quality_reference_value
+            - traceability_evidence_reference_value
         annotations:
             references: "ISO 14040; ISO 14044; ISO 14067; Product Environmental Footprint; JCGM 200:2012"
             sql_identifier: "mt_boundary_definition_record"
@@ -1323,7 +1323,7 @@ classes:
             - certificate_url_value
             - reference_valid_from_value
             - reference_valid_until_value
-            - evidence_reference_value
+            - traceability_evidence_reference_value
         annotations:
             references: "ISO 17034; ISO Guide 35; JCGM 200:2012"
             sql_identifier: "mt_reference_material"
@@ -1337,15 +1337,15 @@ classes:
             - measurement_standard_type_value
             - measurement_standard_owner_value
             - measurement_standard_level_value
-            - quantity_kind_value
-            - quantity_unit_value
+            - traceability_quantity_kind_value
+            - traceability_quantity_unit_value
             - assigned_value_value
             - assigned_value_unit_value
             - assigned_value_uncertainty_value
             - calibration_records
             - reference_valid_from_value
             - reference_valid_until_value
-            - evidence_reference_value
+            - traceability_evidence_reference_value
         annotations:
             references: "JCGM 200:2012; ISO/IEC 17025; ILAC P10"
             sql_identifier: "mt_measurement_standard"
@@ -1363,7 +1363,7 @@ classes:
             - competence_status_value
             - reference_valid_from_value
             - reference_valid_until_value
-            - evidence_reference_value
+            - traceability_evidence_reference_value
         annotations:
             references: "ISO/IEC 17025; ISO 17034; ISO 9001; ILAC P10"
             sql_identifier: "mt_competence_record"
@@ -1379,23 +1379,23 @@ classes:
             - same_measurand_definition_value
             - same_method_or_boundary_value
             - comparability_decision_value
-            - uncertainty_reference_value
+            - traceability_uncertainty_reference_value
             - comparability_rationale_value
         annotations:
             references: "JCGM 200:2012; JCGM 106:2012"
             sql_identifier: "mt_comparability_assessment"
 
-    EvidenceReference:
+    TraceabilityEvidenceReference:
         class_uri: mt:evidenceReference
         description: "Supporting evidence record for a traceability statement, chain, calibration, method, boundary, reference material, or competence record"
         slots:
-            - evidence_identifier_value
-            - evidence_type_value
-            - evidence_url_value
-            - evidence_description_value
-            - evidence_date_value
-            - evidence_provider_value
-            - evidence_version_value
+            - traceability_evidence_identifier_value
+            - traceability_evidence_type_value
+            - traceability_evidence_url_value
+            - traceability_evidence_description_value
+            - traceability_evidence_date_value
+            - traceability_evidence_provider_value
+            - traceability_evidence_version_value
         annotations:
             sql_identifier: "mt_evidence_reference"
 
@@ -1686,7 +1686,7 @@ enums:
             not_evaluated:
                 description: "Comparability has not been evaluated"
 
-    EvidenceTypeEnum:
+    TraceabilityEvidenceTypeEnum:
         description: "Types of evidence used to support traceability"
         permissible_values:
             calibration_certificate:
